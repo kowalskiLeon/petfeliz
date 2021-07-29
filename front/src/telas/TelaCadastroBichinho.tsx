@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Card, Container, Grid, TextField } from "@material-ui/core";
 import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined';
+import PetsOutlinedIcon from '@material-ui/icons/PetsOutlined';
 
 
-const TelaCadastro = () => {
+const TelaCadastroBichinho = () => {
     const CorpoCadastro = styled.div`
     width:100%;
     background-color: white;
@@ -47,7 +48,7 @@ const TelaCadastro = () => {
     }
     
   `;
-  const WarningButton = styled.button`
+    const WarningButton = styled.button`
     margin: 2em;
     font-size: 1em;
     width: 8em;
@@ -63,7 +64,7 @@ const TelaCadastro = () => {
         
         transition: 0.3s;
     }`
-    
+
 
     const useStyles = makeStyles(theme => ({
         boxDiv: {
@@ -103,23 +104,11 @@ const TelaCadastro = () => {
             <Container maxWidth={false} className={classes.fullscreen}>
                 <Box mt={10} ml={3} className={classes.boxDiv}>
                     <Grid container direction="row" justifyContent="flex-start">
-                        <PersonOutlineOutlinedIcon className={classes.icon}></PersonOutlineOutlinedIcon>
-                        <Titulo>Cadastro Pessoal</Titulo>
+                        <PetsOutlinedIcon className={classes.icon}></PetsOutlinedIcon>
+                        <Titulo>Cadastro Bichinho</Titulo>
                     </Grid>
                 </Box>
             </Container>
-            <Box mt={3}>
-                <Grid container direction="row" justifyContent="flex-start">
-                    <Grid item xs={12} sm={12} lg={6} >
-                        <Informacoes>
-                            <p>Preencha todos os campos! Nós não compartilharemos
-                                nenhuma informação pessoal ou dado sensível seu
-                                com ninguém.
-                            </p>
-                        </Informacoes>
-                    </Grid>
-                </Grid>
-            </Box>
             <Box mt={3}>
                 <Grid container direction="row" justifyContent="flex-start">
                     <Grid item xs={12} sm={12} lg={6} >
@@ -130,30 +119,14 @@ const TelaCadastro = () => {
             <Box mt={3}>
                 <Grid container direction="row" justifyContent="flex-start">
                     <Grid item xs={12} sm={12} lg={6} >
-                        <TextField className={classes.campoEntrada} id="outlined-basic" type="text" label="Sobrenome" variant="outlined" />
+                        <TextField className={classes.campoEntrada} id="outlined-basic" type="number" label="Idade estimada em Meses" variant="outlined" />
                     </Grid>
                 </Grid>
             </Box>
             <Box mt={3}>
                 <Grid container direction="row" justifyContent="flex-start">
                     <Grid item xs={12} sm={12} lg={6} >
-                        <TextField
-                            id="date"
-                            label="Data de Nascimento"
-                            type="date"
-                            variant="outlined"
-                            className={classes.campoEntrada}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                        />
-                    </Grid>
-                </Grid>
-            </Box>
-            <Box mt={3}>
-                <Grid container direction="row" justifyContent="flex-start">
-                    <Grid item xs={12} sm={12} lg={6} >
-                        <TextField className={classes.campoEntrada} id="outlined-basic" type="email" label="E-Mail" variant="outlined" />
+                        <TextField className={classes.campoEntrada} id="outlined-basic" type="text" label="Descrição" variant="outlined" />
                     </Grid>
                 </Grid>
             </Box>
@@ -161,24 +134,24 @@ const TelaCadastro = () => {
             <Box mt={3}>
                 <Grid container direction="row" justifyContent="flex-start">
                     <Grid item xs={12} sm={12} lg={6} >
-                        <TextField className={classes.campoEntrada} id="outlined-basic" type="text" label="Telefone" variant="outlined" />
+                        <p>Foto do Bichinho</p>
                     </Grid>
                 </Grid>
-            </Box>
-
-            <Box mt={3}>
                 <Grid container direction="row" justifyContent="flex-start">
                     <Grid item xs={12} sm={12} lg={6} >
-                        <TextField className={classes.campoEntrada} id="outlined-basic" type="password" label="Senha" variant="outlined" />
+                        <img src=''/>
                     </Grid>
                 </Grid>
-            </Box>
-
-            <Box mt={3}>
-                <Grid container direction="row" justifyContent="flex-start">
+                <Grid container direction="column" justifyContent="flex-start">
                     <Grid item xs={12} sm={12} lg={6} >
-                        <TextField className={classes.campoEntrada} id="outlined-basic" type="password" label="Confirmar Senha" variant="outlined" />
+                        <TextField className={classes.campoEntrada} id="outlined-basic" type="text" label="Descrição" />
+
                     </Grid>
+                    <Grid item xs={12} sm={12} lg={6} >
+                        <Button>Upload</Button>
+
+                    </Grid>
+
                 </Grid>
             </Box>
 
@@ -198,4 +171,4 @@ const TelaCadastro = () => {
     );
 
 }
-export default TelaCadastro;
+export default TelaCadastroBichinho;
