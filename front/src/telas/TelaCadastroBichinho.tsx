@@ -1,9 +1,9 @@
 import React from "react";
 import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
-import { Box, Card, Container, Grid, TextField } from "@material-ui/core";
-import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined';
+import { Box, Container, Grid, TextField, Select, InputLabel,MenuItem } from "@material-ui/core";
 import PetsOutlinedIcon from '@material-ui/icons/PetsOutlined';
+import texturapet from '../imgs/texturapet.jpg';
 
 
 const TelaCadastroBichinho = () => {
@@ -19,15 +19,6 @@ const TelaCadastroBichinho = () => {
     const Titulo = styled.h2`
     text-align: left;
     margin-left: 16px;
-  `;
-
-    const Informacoes = styled.div`
-    border: 1px solid transparent;
-    border-radius: 10px;
-    background-image: linear-gradient(to bottom right, #e9d4f4, #f2e2ff);
-    margin-left: auto;
-    margin-right: auto;
-    width: 60%
   `;
 
     const Button = styled.button`
@@ -65,6 +56,14 @@ const TelaCadastroBichinho = () => {
         transition: 0.3s;
     }`
 
+    const FotoPerfil = styled.img`
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    padding: 5px;
+    width: 150px;
+    height: 150px;
+    `
+
 
     const useStyles = makeStyles(theme => ({
         boxDiv: {
@@ -94,6 +93,11 @@ const TelaCadastroBichinho = () => {
 
         campoEntrada: {
             width: '60%'
+        },
+
+        selecao: {
+            width: '60%',
+            marginTop: '24px',
         }
 
     }));
@@ -130,6 +134,34 @@ const TelaCadastroBichinho = () => {
                     </Grid>
                 </Grid>
             </Box>
+            <Box mt={3}>
+                <Grid container direction="row" justifyContent="flex-start">
+                    <Grid item xs={12} sm={12} lg={6} >
+                        <InputLabel className={classes.selecao} id="demo-simple-select-label">Tipo de Animal</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            // value={age}
+                            // onChange={handleChange}
+                            className={classes.selecao}
+                        >
+                            <MenuItem value={null}>Selecione um tipo</MenuItem>
+                            <MenuItem value={'Canino'}>Canino</MenuItem>
+                            <MenuItem value={'Felino'}>Felino</MenuItem>
+                            <MenuItem value={'Ave'}>Ave</MenuItem>
+                            <MenuItem value={'Aquatico'}>Aquatico</MenuItem>
+                            <MenuItem value={'Outros'}>Outros</MenuItem>
+                        </Select>
+                    </Grid>
+                </Grid>
+            </Box>
+            <Box mt={3}>
+                <Grid container direction="row" justifyContent="flex-start">
+                    <Grid item xs={12} sm={12} lg={6} >
+                        <TextField className={classes.campoEntrada} id="outlined-basic" type="text" label="Contato" variant="outlined" />
+                    </Grid>
+                </Grid>
+            </Box>
 
             <Box mt={3}>
                 <Grid container direction="row" justifyContent="flex-start">
@@ -139,14 +171,10 @@ const TelaCadastroBichinho = () => {
                 </Grid>
                 <Grid container direction="row" justifyContent="flex-start">
                     <Grid item xs={12} sm={12} lg={6} >
-                        <img src=''/>
+                        <FotoPerfil src={texturapet} />
                     </Grid>
                 </Grid>
                 <Grid container direction="column" justifyContent="flex-start">
-                    <Grid item xs={12} sm={12} lg={6} >
-                        <TextField className={classes.campoEntrada} id="outlined-basic" type="text" label="Descrição" />
-
-                    </Grid>
                     <Grid item xs={12} sm={12} lg={6} >
                         <Button>Upload</Button>
 

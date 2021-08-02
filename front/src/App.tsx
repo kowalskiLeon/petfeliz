@@ -5,6 +5,7 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import TelaCadastro from './telas/TelaCadastro';
 import TelaCadastroBichinho from './telas/TelaCadastroBichinho';
+import TelaInicial from './telas/TelaInicial';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
             <BrowserRouter>
                 <Switch>
                     <Route path="/login" exact={true} component={TelaLogin} />
+                    <Route path="/home" exact={true} component={TelaInicial} />
                     <Route path="/cadastro" exact={true} component={TelaCadastro} />
                     <Route path="/cadastrobichinho" exact={true} component={TelaCadastroBichinho} />
                 </Switch>

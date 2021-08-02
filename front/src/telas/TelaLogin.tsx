@@ -2,7 +2,8 @@ import { Box, Card, Container, Grid, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
 import React from 'react';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import Axios from 'axios'
 
 const TelaLogin = () => {
 
@@ -114,11 +115,11 @@ const TelaLogin = () => {
             textAlign: 'center'
         },
 
-        link:{
+        link: {
             textDecoration: 'none',
-            color:'white'
+            color: 'white'
         }
-        
+
     }));
 
     const classes = useStyles();
@@ -146,7 +147,7 @@ const TelaLogin = () => {
                                         </Grid>
                                     </Box>
                                     <Box justifyContent="center" alignItems="center" textAlign="center" >
-                                        <Button>Entrar</Button>
+                                        <Button onClick={login}>Entrar</Button>
                                     </Box>
                                     <Box mb={3} justifyContent="flex-end" alignItems="flex-end" textAlign="end">
                                         <EsqueciMinhaSenha href="#">Esqueci minha senha</EsqueciMinhaSenha>
@@ -170,6 +171,17 @@ const TelaLogin = () => {
         </CorpoDoLogin>
 
     )
+}
+
+
+const login = () => {
+    console.log('teste')
+    Axios.get('http://localhost:3001/teste')
+        .then(function (response) {
+            console.log('pegou')
+            console.log(response);
+        })
+        ;
 }
 
 export default TelaLogin;
