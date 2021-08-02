@@ -9,16 +9,20 @@ export class ControladorBase <F extends Model, T extends ServicoBase<F>>{
         this.servicoBase = servicoBase;
     }
 
-    public pegar = () => function(req, res){
+    public pegarTodos(req, res){
+        var result = this.servicoBase.pegarTodos(req, res);
+        return result;
+    }
+    public pegar(req, res){
         return this.servicoBase.pegar(req, res);
     }
-    public atualizar = () => function(req, res){
+    public atualizar(req, res){
         return this.servicoBase.atualizar(req, res);
     }
-    public criar = () => function(req, res){
+    public criar(req, res){
         return this.servicoBase.criar(req, res);
     }
-    public excluir = () => function(req, res){
+    public excluir(req, res){
         return this.servicoBase.excluir(req, res);
     }
 

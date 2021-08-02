@@ -4,9 +4,12 @@ import styled from 'styled-components';
 import React from 'react';
 import { Link } from 'react-router-dom'
 import Axios from 'axios'
+import { Pessoa } from '../entidades/pessoa';
 
-const TelaLogin = () => {
+var email = '';
+var senha = '';
 
+const TelaLogin = (props) => {
 
     const Titulo = styled.h1`
     font-size: 2em;
@@ -122,6 +125,24 @@ const TelaLogin = () => {
 
     }));
 
+    const login = (e) => {
+        e.preventDefault();
+        Axios.get('http://localhost:3001/login', {
+            params: {
+                email: email,
+                senha: senha
+            }
+        })
+            .then(function (response) {
+                console.log(props)
+                if (response.data) {
+                    props.mudarUsuario(new Pessoa(response.data.id, response.data.nome, response.data.sobrenome));
+                    props.history.push('/home');
+                }
+            })
+            ;
+    }
+
     const classes = useStyles();
     return (
         <CorpoDoLogin>
@@ -137,13 +158,13 @@ const TelaLogin = () => {
                                 <FormularioLogin>
                                     <Box justifyContent="center" mx='auto' width='100%' alignItems="center" textAlign="center" >
                                         <Grid item xs={10} sm={10} lg={6} className={classes.centro}>
-                                            <TextField className={classes.campos} id="outlined-basic" type="email" label="E-Mail" variant="outlined" />
+                                            <TextField className={classes.campos} onChange={(e) => { email = e.target.value }} id="outlined-basic" type="email" label="E-Mail" variant="outlined" />
                                         </Grid>
                                     </Box>
 
                                     <Box justifyContent="center" alignItems="center" textAlign="center" >
                                         <Grid item xs={10} sm={10} lg={6} className={classes.centro}>
-                                            <TextField className={classes.campos} id="outlined-password-input" variant="outlined" label="Senha" type="password" autoComplete="current-password" />
+                                            <TextField className={classes.campos} onChange={(e) => { senha = e.target.value }} id="outlined-password-input" variant="outlined" label="Senha" type="password" autoComplete="current-password" />
                                         </Grid>
                                     </Box>
                                     <Box justifyContent="center" alignItems="center" textAlign="center" >
@@ -171,17 +192,6 @@ const TelaLogin = () => {
         </CorpoDoLogin>
 
     )
-}
-
-
-const login = () => {
-    console.log('teste')
-    Axios.get('http://localhost:3001/teste')
-        .then(function (response) {
-            console.log('pegou')
-            console.log(response);
-        })
-        ;
 }
 
 export default TelaLogin;

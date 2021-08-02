@@ -3,8 +3,7 @@ import React from "react";
 
 import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
-import { Box, Button, Grid } from "@material-ui/core";
-import texturapet from '../imgs/texturapet.jpg';
+import { Box, Grid } from "@material-ui/core";
 import DadosAnimais from "../componentes/DadosAnimais";
 import ConteudoAnimais from "../componentes/ConteudoAnimais";
 
@@ -79,12 +78,12 @@ const TelaInicial = () => {
                         <Titulo>Conheça nossos bichinhos!</Titulo>
                     </Grid>
                     <Grid container direction="row" justifyContent="flex-start">
-                        <Grid container direction="column" lg={6} xs={12} justifyContent="center">
+                        <Grid item direction="column" lg={6} xs={12} >
                             <InfoScreen>
                                 <ConteudoAnimais />
                             </InfoScreen>
                         </Grid>
-                        <Grid container direction="column" lg={6} xs={12} justifyContent="center">
+                        <Grid item direction="column" lg={6} xs={12}>
                             <DadosAnimais campos={columns} />
                         </Grid>
                     </Grid>

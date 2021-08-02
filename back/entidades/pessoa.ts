@@ -44,10 +44,20 @@ PessoaModel.init(
         senha: {
             type: Sequelize.STRING,
             allowNull: false
+        },
+        createdAt: {
+            type: Sequelize.DATE,
+            allowNull: false,
+            defaultValue: Sequelize.NOW
+        },
+        updatedAt: {
+            type: Sequelize.DATE,
+            allowNull: false,
+            defaultValue: Sequelize.NOW
         }
     }, {
     tableName: 'pessoa',
     sequelize: database
 });
 
-PessoaModel.sync({ force: true }).then(() => console.log("Tabela de Pessoas Criada"));
+PessoaModel.sync({ force: false }).then(() => console.log("Tabela de Pessoas Criada"));

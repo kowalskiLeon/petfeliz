@@ -11,15 +11,13 @@ export class Rotas {
 
     public routes(app): void {
         app.route("/pessoa")
-            .get(this.pessoaControlador.pegar)
-            .put(this.pessoaControlador.atualizar);
+            .get((req, res) => this.pessoaControlador.servicoBase.pegarTodos(req, res))
+            .put((req, res) => this.pessoaControlador.atualizar(req,res));
         app.route("/pessoa/:id")
-            .get(this.pessoaControlador.pegar)
-            .put(this.pessoaControlador.atualizar)
-            .delete(this.pessoaControlador.excluir);
-        // app.route("/teste")
-        // .get(
-        //     () => console.log('teste')
-        // )
+            .get((req, res) => this.pessoaControlador.pegar(req,res))
+            .put((req, res) => this.pessoaControlador.atualizar(req,res))
+            .delete((req, res) => this.pessoaControlador.excluir(req,res));
+        app.route("/login")
+            .get((req, res) => this.pessoaControlador.login(req, res));
     }
 }

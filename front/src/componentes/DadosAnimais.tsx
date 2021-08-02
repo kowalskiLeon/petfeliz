@@ -58,29 +58,29 @@ const DadosAnimais = (props) => {
     const classes = useStyles();
     return (
         <div>
-            <Box  ml={5} mr={5}>
+            <Box ml={5} mr={5}>
                 <CampoBusca>
                     <Grid container direction="row" justifyContent="center">
                         <Box my={3} mx={5} width='100%'>
                             <Grid container direction="row" justifyContent="center" >
-                                    <TextField className={classes.campoEntrada} id="outlined-basic" type="text" label="Nome" variant="outlined" />
+                                <TextField className={classes.campoEntrada} id="outlined-basic" type="text" label="Nome" variant="outlined" />
                             </Grid>
                             <Grid container direction="row" justifyContent="center">
-                                    <InputLabel className={classes.selecao} id="demo-simple-select-label">Tipo de Animal</InputLabel>
-                                    <Select
-                                        labelId="demo-simple-select-label"
-                                        id="demo-simple-select"
-                                        // value={age}
-                                        // onChange={handleChange}
-                                        className={classes.selecao}
-                                    >
-                                        <MenuItem value={null}>Selecione um tipo</MenuItem>
-                                        <MenuItem value={'Canino'}>Canino</MenuItem>
-                                        <MenuItem value={'Felino'}>Felino</MenuItem>
-                                        <MenuItem value={'Ave'}>Ave</MenuItem>
-                                        <MenuItem value={'Aquatico'}>Aquatico</MenuItem>
-                                        <MenuItem value={'Outros'}>Outros</MenuItem>
-                                    </Select>
+                                <InputLabel className={classes.selecao} id="demo-simple-select-label">Tipo de Animal</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    // value={age}
+                                    // onChange={handleChange}
+                                    className={classes.selecao}
+                                >
+                                    <MenuItem value={'Nenhum'}>Selecione um tipo</MenuItem>
+                                    <MenuItem value={'Canino'}>Canino</MenuItem>
+                                    <MenuItem value={'Felino'}>Felino</MenuItem>
+                                    <MenuItem value={'Ave'}>Ave</MenuItem>
+                                    <MenuItem value={'Aquatico'}>Aquatico</MenuItem>
+                                    <MenuItem value={'Outros'}>Outros</MenuItem>
+                                </Select>
                             </Grid>
                         </Box>
                     </Grid>
@@ -89,18 +89,20 @@ const DadosAnimais = (props) => {
             <Box ml={5} mr={5}>
                 <Tabela>
                     <thead>
-                        <th>
-                            Nome
-                        </th>
-                        <th>
-                            Tipo
-                        </th>
-                        <th>
-                            Tamanho
-                        </th>
-                        <th>
-                            Informações
-                        </th>
+                        <tr>
+                            <th>
+                                Nome
+                            </th>
+                            <th>
+                                Tipo
+                            </th>
+                            <th>
+                                Tamanho
+                            </th>
+                            <th>
+                                Informações
+                            </th>
+                        </tr>
                     </thead>
                     <tbody>
                         {props.campos.map(

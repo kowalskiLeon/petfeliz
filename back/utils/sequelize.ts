@@ -9,7 +9,7 @@ export const database = new Sequelize({
   username: 'root',
   password: '642138983',
   dialect: "mysql",
-  port: 3306,
+  port: 3306
 });
 
 database.authenticate()

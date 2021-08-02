@@ -12,4 +12,8 @@ export class PessoaControlador extends ControladorBase<PessoaModel, PessoaServic
         this.servicoBase = this.pessoaService;
     }
 
+    public login(req, res){
+        this.pessoaService.login(req, res);
+    }
+
 }
