@@ -18,20 +18,11 @@ function App() {
 
     const mudarUsuario = (p: Pessoa) => {
         setUsuario(p);
-        localStorage.setItem('sessao', p.id + '');
+        localStorage.setItem('sessao.id', p.id+'' );
+        localStorage.setItem('sessao.nome', p.nome );
     }
 
-    if (localStorage.getItem('sessao') != 'nenhum') {
-        Axios.get('http://localhost:3001/pessoa/' + localStorage.getItem('sessao'), {
-        })
-            .then(function (response) {
-                if (response.data) {
-                    var p = new Pessoa(response.data.id, response.data.nome, response.data.sobrenome);
-                    mudarUsuario(p);
-                }
-            })
-    }
-
+    
 
     return (
         <div className="App">
@@ -40,7 +31,7 @@ function App() {
                 <Switch>
                     <Route path="/" exact={true} component={(props) => <TelaLogin {...props} usuario={usuario} mudarUsuario={mudarUsuario} />} />
                     <Route path="/home" exact={true} component={TelaInicial} />
-                    <Route path="/cadastro" exact={true} component={TelaCadastro} />
+                    <Route path="/cadastro" exact={true} component={(props) => <TelaCadastro  {...props}/>} />
                     <Route path="/cadastrobichinho" exact={true} component={TelaCadastroBichinho} />
                 </Switch>
             </ BrowserRouter>

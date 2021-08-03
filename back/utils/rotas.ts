@@ -11,8 +11,8 @@ export class Rotas {
 
     public routes(app): void {
         app.route("/pessoa")
-            .get((req, res) => this.pessoaControlador.servicoBase.pegarTodos(req, res))
-            .put((req, res) => this.pessoaControlador.atualizar(req,res));
+            .get((req, res) => this.pessoaControlador.pegarTodos(req, res))
+            .post((req, res) => this.pessoaControlador.criar(req,res));
         app.route("/pessoa/:id")
             .get((req, res) => this.pessoaControlador.pegar(req,res))
             .put((req, res) => this.pessoaControlador.atualizar(req,res))

@@ -12,7 +12,13 @@ export class PessoaModel extends Model {
     email: string
     telefone: string
     senha: string
+
+    constructor(){
+        super()
+    }
 }
+
+
 
 PessoaModel.init(
     {

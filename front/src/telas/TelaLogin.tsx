@@ -10,7 +10,9 @@ var email = '';
 var senha = '';
 
 const TelaLogin = (props) => {
-
+    if(localStorage.getItem('sessao.nome')!== 'nenhum'){
+        props.history.push('/home');
+    }
     const Titulo = styled.h1`
     font-size: 2em;
     text-align: center;
@@ -169,9 +171,6 @@ const TelaLogin = (props) => {
                                     </Box>
                                     <Box justifyContent="center" alignItems="center" textAlign="center" >
                                         <Button onClick={login}>Entrar</Button>
-                                    </Box>
-                                    <Box mb={3} justifyContent="flex-end" alignItems="flex-end" textAlign="end">
-                                        <EsqueciMinhaSenha href="#">Esqueci minha senha</EsqueciMinhaSenha>
                                     </Box>
                                 </FormularioLogin>
                             </Card>

@@ -45,39 +45,47 @@ const MenuSuperior = (props) => {
 
     const sair = (e) => {
         e.preventDefault();
-        localStorage.setItem('sessao', 'nenhum');
-        props.history.push('/login');
+        localStorage.setItem('sessao.nome', 'nenhum');
+        localStorage.setItem('sessao.id', '-1');
+        props.history.push('/');
     }
 
-    const mensagem = () => {
-        var sessao = localStorage.getItem('sessao');
-        if(sessao != 'nenhum'){
+    const Mensagem = () => {
+        var sessao = localStorage.getItem('sessao.nome');
+        if (sessao !== 'nenhum') {
+            return (
+                <div>
+                    <Box justifyContent="flex-end">
+                        <Grid container direction="row">
+                            <Box ml={3} my={'auto'}>
+                                <h3>Olá, {localStorage.getItem('sessao.nome')}!</h3>
+                            </Box>
+                            <Box my={'auto'}><LinkMenu href="/home"><Titulo>Tela Inicial</Titulo></LinkMenu></Box>
+                            <Box my={'auto'}><LinkMenu href="/cadastrobichinho"><Titulo>Cadastrar Bichinho</Titulo></LinkMenu></Box>
+                            <Box my={'auto'}><LinkMenu href="/cadastro"><Titulo>Atualizar Dados</Titulo></LinkMenu></Box>
+                            <Box ml={3}> <Button onClick={sair}><h3>Sair</h3></Button> </Box>
+                        </Grid>
+                    </Box>
+                </div>
+            )
+        } else {
             return (
                 <div>
                     <Box ml={3}>
-                        <h3>Olá, {props.usuario.nome}!</h3>
-                    </Box>
-                    <Box ml={3}> <Button onClick={sair}><h3>Sair</h3></Button> </Box>
-                </div>
-            )
-        }else{
-            return(
-                <div>
-                    <Box>
-                    <LinkMenu href="/cadastro"><Titulo>Cadastre-se!</Titulo></LinkMenu>
+                        <LinkMenu href="/cadastro"><Titulo>Cadastre-se!</Titulo></LinkMenu>
                     </Box>
                 </div>
             )
         }
-        
+
     }
 
     return (
         <div>
             <AppBar className={classes.appbar} position="fixed">
                 <Toolbar>
-                    <LinkMenu href="/home"><PetsIcon className={classes.icon}></PetsIcon><Titulo>Pet Feliz</Titulo></LinkMenu>
-                    {mensagem}
+                    <LinkMenu href="/"><PetsIcon className={classes.icon}></PetsIcon><Titulo>Pet Feliz</Titulo></LinkMenu>
+                    <Mensagem></Mensagem>
                 </Toolbar>
             </AppBar>
 
