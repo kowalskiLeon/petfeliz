@@ -24,15 +24,3 @@ class App {
 }
 
 export default new App().app;
-
-// const app = express()
-// const port = 3001
-// app.use(cors())
-
-// app.get('/', (req, res, next) => {
-//     res.json('Hello world')
-// })
-
-// app.listen(port, () => {
-//     console.log(`App is listening on port ${port}`)
-// })

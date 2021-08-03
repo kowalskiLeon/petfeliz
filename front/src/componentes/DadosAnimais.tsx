@@ -1,11 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Button, Grid, Select, InputLabel, MenuItem, TextField } from "@material-ui/core";
 import texturapet from '../imgs/texturapet.jpg';
+import Axios from 'axios';
+import { Animal } from "../entidades/animal";
 
 const DadosAnimais = (props) => {
+
+    const [listaAnimais, setListaAnimais] = useState(new Array());
+   
+
+
+    const mudarLista = (p: Animal[]) => {
+        setListaAnimais(p);
+    }
+
+    
+
+    useEffect(() => {
+        mudarLista([]);
+        Axios.get('http://localhost:3001/animal', {
+        })
+            .then(function (response) {
+                if (response.data) {
+                    mudarLista(response.data);
+                    console.log(listaAnimais);
+                }
+            });
+    }, []);
+
 
     const Linha = styled.tr`
         text-align: center;
@@ -58,7 +83,7 @@ const DadosAnimais = (props) => {
     const classes = useStyles();
     return (
         <div>
-            <Box ml={5} mr={5}>
+            <Box mx={5} >
                 <CampoBusca>
                     <Grid container direction="row" justifyContent="center">
                         <Box my={3} mx={5} width='100%'>
@@ -86,7 +111,7 @@ const DadosAnimais = (props) => {
                     </Grid>
                 </CampoBusca>
             </Box>
-            <Box ml={5} mr={5}>
+            <Box my={3} mx={5} >
                 <Tabela>
                     <thead>
                         <tr>
@@ -105,15 +130,14 @@ const DadosAnimais = (props) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {props.campos.map(
+                        {listaAnimais.map(
                             campo => {
-                                console.log(campo);
                                 return (
                                     <Linha key={campo.id}>
                                         <td>{campo.nome}</td>
                                         <td>{campo.tipo}</td>
-                                        <td>{campo.tamanho}</td>
-                                        <td><BotaoVerMais>Ver mais</BotaoVerMais></td>
+                                        <td>{campo.idade}</td>
+                                        <td><BotaoVerMais onClick={props.mudarAnimal(campo)}>Ver mais</BotaoVerMais></td>
                                     </Linha>
                                 );
                             }

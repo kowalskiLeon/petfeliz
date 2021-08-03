@@ -30,7 +30,7 @@ function App() {
                 <MenuSuperior usuario={usuario} />
                 <Switch>
                     <Route path="/" exact={true} component={(props) => <TelaLogin {...props} usuario={usuario} mudarUsuario={mudarUsuario} />} />
-                    <Route path="/home" exact={true} component={TelaInicial} />
+                    <Route path="/home" exact={true} component={(props) => < TelaInicial {...props}/>} />
                     <Route path="/cadastro" exact={true} component={(props) => <TelaCadastro  {...props}/>} />
                     <Route path="/cadastrobichinho" exact={true} component={TelaCadastroBichinho} />
                 </Switch>

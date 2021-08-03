@@ -1,12 +1,41 @@
 import React from "react";
 import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
-import { Box, Container, Grid, TextField, Select, InputLabel,MenuItem } from "@material-ui/core";
+import { Box, Container, Grid, TextField, Select, InputLabel, MenuItem } from "@material-ui/core";
 import PetsOutlinedIcon from '@material-ui/icons/PetsOutlined';
 import texturapet from '../imgs/texturapet.jpg';
+import { Animal } from "../entidades/animal";
+import Axios from 'axios';
 
 
-const TelaCadastroBichinho = () => {
+var animal: Animal = new Animal();
+
+function validacao() {
+    if (!animal.nome) {
+        console.log('nome invalido')
+        return false;
+    }
+    if (!animal.descricao) {
+        console.log('descricao invalido')
+        return false;
+    }
+    if (!animal.contato) {
+        console.log('email invalido')
+        return false;
+    }
+    if (!animal.tipo) {
+        console.log('nascimento invalido')
+        return false;
+    }
+    if (!animal.idade) {
+        console.log('sobrenome invalido')
+        return false;
+    }
+
+    return true;
+}
+
+const TelaCadastroBichinho = (props) => {
     const CorpoCadastro = styled.div`
     width:100%;
     background-color: white;
@@ -102,6 +131,31 @@ const TelaCadastroBichinho = () => {
 
     }));
 
+    const salvar = (e) => {
+        e.preventDefault();
+        animal.idPessoa = parseInt(localStorage.getItem('sessao.id'))
+        if (validacao() === true) {
+            Axios.post('http://localhost:3001/animal', {
+                params: {
+                    nome: animal.nome,
+                    idade: animal.idade,
+                    descricao: animal.descricao,
+                    tipo: animal.tipo,
+                    contato: animal.contato,
+                    idPessoa: animal.idPessoa
+                }
+            })
+                .then(function (response) {
+                    if (response.data) {
+                        console.log(response.data);
+                        props.history.push('/home');
+                    }
+                });
+        } else {
+            console.log('falhou')
+        }
+    }
+
     const classes = useStyles();
     return (
         <CorpoCadastro>
@@ -116,21 +170,24 @@ const TelaCadastroBichinho = () => {
             <Box mt={3}>
                 <Grid container direction="row" justifyContent="flex-start">
                     <Grid item xs={12} sm={12} lg={6} >
-                        <TextField className={classes.campoEntrada} id="outlined-basic" type="text" label="Nome" variant="outlined" />
+                        <TextField className={classes.campoEntrada} id="outlined-basic" onChange={(e) => { animal.nome = e.target.value }}
+                            type="text" label="Nome" variant="outlined" />
                     </Grid>
                 </Grid>
             </Box>
             <Box mt={3}>
                 <Grid container direction="row" justifyContent="flex-start">
                     <Grid item xs={12} sm={12} lg={6} >
-                        <TextField className={classes.campoEntrada} id="outlined-basic" type="number" label="Idade estimada em Meses" variant="outlined" />
+                        <TextField className={classes.campoEntrada} id="outlined-basic" onChange={(e) => { animal.idade = parseInt(e.target.value)}}
+                            type="number" label="Idade estimada em Meses" variant="outlined" />
                     </Grid>
                 </Grid>
             </Box>
             <Box mt={3}>
                 <Grid container direction="row" justifyContent="flex-start">
                     <Grid item xs={12} sm={12} lg={6} >
-                        <TextField className={classes.campoEntrada} id="outlined-basic" type="text" label="Descrição" variant="outlined" />
+                        <TextField className={classes.campoEntrada} id="outlined-basic" onChange={(e) => { animal.descricao = e.target.value }}
+                            type="text" label="Descrição" variant="outlined" />
                     </Grid>
                 </Grid>
             </Box>
@@ -141,7 +198,8 @@ const TelaCadastroBichinho = () => {
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            // value={age}
+                            onChange={(e) => { animal.tipo = e.target.value + '' }}
+                            value={animal.nome}
                             // onChange={handleChange}
                             className={classes.selecao}
                         >
@@ -158,7 +216,7 @@ const TelaCadastroBichinho = () => {
             <Box mt={3}>
                 <Grid container direction="row" justifyContent="flex-start">
                     <Grid item xs={12} sm={12} lg={6} >
-                        <TextField className={classes.campoEntrada} id="outlined-basic" type="text" label="Contato" variant="outlined" />
+                        <TextField className={classes.campoEntrada}  onChange={(e) => { animal.contato = e.target.value }} id="outlined-basic" type="text" label="Contato" variant="outlined" />
                     </Grid>
                 </Grid>
             </Box>
@@ -186,8 +244,8 @@ const TelaCadastroBichinho = () => {
             <Box mt={1}>
                 <Grid container direction="row" justifyContent="flex-start">
                     <Grid item xs={12} sm={12} lg={6} >
-                        <Button>Cadastrar</Button>
-                        <WarningButton>Limpar</WarningButton>
+                        <Button onClick={salvar}>Cadastrar</Button>
+                        <WarningButton >Limpar</WarningButton>
                     </Grid>
                 </Grid>
             </Box>

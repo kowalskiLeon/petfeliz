@@ -4,30 +4,30 @@ import { Model, DataTypes, BuildOptions } from "sequelize";
 import { database} from '../utils/sequelize'
 
 
-export class PessoaModel extends Model {
+export class AnimalModel extends Model {
     id: number
     nome: string
-    sobrenome: string
-    nascimento: Date
-    email: string
-    telefone: string
-    senha: string
+    idade: number
+    descricao: string
+    tipo: string
+    contato: string
+    idPessoa: number
 
 }
 
-export interface Pessoa {
+export interface Animal {
     id: number
     nome: string
-    sobrenome: string
-    nascimento: Date
-    email: string
-    telefone: string
-    senha: string
+    idade: number
+    descricao: string
+    tipo: string
+    contato: string
+    idPessoa: number
 }
 
 
 
-PessoaModel.init(
+AnimalModel.init(
     {
         id: {
             type: Sequelize.INTEGER,
@@ -38,24 +38,24 @@ PessoaModel.init(
             type: Sequelize.STRING,
             allowNull: false
         },
-        sobrenome: {
+        idade: {
+            type: Sequelize.INTEGER,
+            allowNull: false
+        },
+        descricao: {
             type: Sequelize.STRING,
             allowNull: false
         },
-        nascimento: {
-            type: Sequelize.DATEONLY,
-            allowNull: false
-        },
-        email: {
+        tipo: {
             type: Sequelize.STRING,
             allowNull: false
         },
-        telefone: {
+        contato: {
             type: Sequelize.STRING,
             allowNull: false
         },
-        senha: {
-            type: Sequelize.STRING,
+        idPessoa: {
+            type: Sequelize.INTEGER,
             allowNull: false
         },
         createdAt: {
@@ -69,8 +69,8 @@ PessoaModel.init(
             defaultValue: Sequelize.NOW
         }
     }, {
-    tableName: 'pessoa',
+    tableName: 'animal',
     sequelize: database
 });
 
-PessoaModel.sync({ force: false }).then(() => console.log("Tabela de Pessoas Criada"));
+AnimalModel.sync({ force: false }).then(() => console.log("Tabela de Animais Criada"));

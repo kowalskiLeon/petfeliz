@@ -1,4 +1,4 @@
-import { PessoaModel } from "../entidades/pessoa";
+import { Pessoa, PessoaModel } from "../entidades/pessoa";
 
 export class PessoaServico {
 
@@ -33,32 +33,13 @@ export class PessoaServico {
 
     public async criar(req, res) {
         var pessoa = req.body.params;
-        console.log(pessoa);
-        // var p: PessoaModel = new PessoaModel();
-        // p.nome = pessoa.nome;
-        // p.sobrenome = pessoa.sobrenome;
-        // p.nascimento = pessoa.nascimento;
-        // p.email = pessoa.email;
-        // p.telefone = pessoa.senha;
-        // p.senha = pessoa.senha;
-        // console.log(p)
-        await PessoaModel.create<PessoaModel>({
-            PessoaModel: {
-                nome: req.body.params.nome,
-                sobrenome: req.body.params.sobrenome,
-                nascimento: req.body.params.nascimento,
-                email: req.body.params.email,
-                telefone: req.body.params.senha,
-                senha: req.body.params.senha
-            }
-        })
-            .then((pessoa) => {
-                console.log(pessoa);
-                res.send(pessoa);
-            })
-            .catch((err: Error) => {
+        const params: Pessoa = pessoa;
+        console.log(params);
+        PessoaModel.create<PessoaModel>(params)
+            .then((node: PessoaModel) => res.status(201).json(node))
+            .catch((err: Error) =>{
                 console.log(err);
-                res.status(500).json(err);
+                res.status(500).json(err)
             });
     }
 
@@ -76,7 +57,10 @@ export class PessoaServico {
                     res.status(404).json({ errors: ["Não encontrado"] });
                 }
             })
-            .catch((err: Error) => res.status(500).json(err));
+            .catch((err: Error) =>{
+                console.log(err);
+                res.status(500).json(err)
+            });
     }
 
     public excluir(req, res) {

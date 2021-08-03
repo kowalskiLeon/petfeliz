@@ -73,17 +73,6 @@ const TelaLogin = (props) => {
     height: 100%;
   `;
 
-    const EsqueciMinhaSenha = styled.a`
-    padding: 2em;
-    color: #9e95ff;
-    transition: 0.3s;
-    text-decoration: none;
-    &:hover {
-        color: #581bf2;
-        transition: 0.3s;
-    }
-  `;
-
 
     const FormularioLogin = styled.form`
         text-align: center;

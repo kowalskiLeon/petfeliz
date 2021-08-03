@@ -1,11 +1,14 @@
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Grid } from "@material-ui/core";
 import DadosAnimais from "../componentes/DadosAnimais";
 import ConteudoAnimais from "../componentes/ConteudoAnimais";
+import Axios from 'axios'
+import { Animal } from "../entidades/animal";
+
 
 const CorpoHome = styled.div`
     width:100%;
@@ -13,7 +16,6 @@ const CorpoHome = styled.div`
     display: flex;
     flex-direction: column;
     height: 100%;
-    
   `;
 
 const Titulo = styled.h2`
@@ -59,15 +61,15 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-
+var animal: Animal;
 
 const TelaInicial = () => {
-    var columns = [
-        { 'id:': 0, 'nome': 'Nome', 'tipo': 'Tipo', 'tamanho': 'Tamanho' },
-        { 'id:': 1, 'nome': 'Nome', 'tipo': 'Tipo', 'tamanho': 'Tamanho' },
-        { 'id:': 2, 'nome': 'Nome', 'tipo': 'Tipo', 'tamanho': 'Tamanho' },
-        { 'id:': 3, 'nome': 'Nome', 'tipo': 'Tipo', 'tamanho': 'Tamanho' },
-    ];
+    const mudarAnimal = (a)=>{
+        console.log(a);
+        animal = a;
+    }
+
+    const sendAnimal = () => {return animal};
 
     const classes = useStyles();
     return (
@@ -84,7 +86,7 @@ const TelaInicial = () => {
                             </InfoScreen>
                         </Grid>
                         <Grid item direction="column" lg={6} xs={12}>
-                            <DadosAnimais campos={columns} />
+                            <DadosAnimais mudarAnimal={mudarAnimal}/>
                         </Grid>
                     </Grid>
 
