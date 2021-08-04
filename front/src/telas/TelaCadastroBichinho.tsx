@@ -168,7 +168,7 @@ const TelaCadastroBichinho = (props) => {
                 </Box>
             </Container>
             <Box mt={3}>
-                <Grid container direction="row" justifyContent="flex-start">
+                <Grid container direction="row" justifyContent="center">
                     <Grid item xs={12} sm={12} lg={6} >
                         <TextField className={classes.campoEntrada} id="outlined-basic" onChange={(e) => { animal.nome = e.target.value }}
                             type="text" label="Nome" variant="outlined" />
@@ -176,7 +176,7 @@ const TelaCadastroBichinho = (props) => {
                 </Grid>
             </Box>
             <Box mt={3}>
-                <Grid container direction="row" justifyContent="flex-start">
+                <Grid container direction="row" justifyContent="center">
                     <Grid item xs={12} sm={12} lg={6} >
                         <TextField className={classes.campoEntrada} id="outlined-basic" onChange={(e) => { animal.idade = parseInt(e.target.value)}}
                             type="number" label="Idade estimada em Meses" variant="outlined" />
@@ -184,7 +184,7 @@ const TelaCadastroBichinho = (props) => {
                 </Grid>
             </Box>
             <Box mt={3}>
-                <Grid container direction="row" justifyContent="flex-start">
+                <Grid container direction="row" justifyContent="center">
                     <Grid item xs={12} sm={12} lg={6} >
                         <TextField className={classes.campoEntrada} id="outlined-basic" onChange={(e) => { animal.descricao = e.target.value }}
                             type="text" label="Descrição" variant="outlined" />
@@ -192,14 +192,14 @@ const TelaCadastroBichinho = (props) => {
                 </Grid>
             </Box>
             <Box mt={3}>
-                <Grid container direction="row" justifyContent="flex-start">
+                <Grid container direction="row" justifyContent="center">
                     <Grid item xs={12} sm={12} lg={6} >
                         <InputLabel className={classes.selecao} id="demo-simple-select-label">Tipo de Animal</InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             onChange={(e) => { animal.tipo = e.target.value + '' }}
-                            value={animal.nome}
+                            value={animal.tipo}
                             // onChange={handleChange}
                             className={classes.selecao}
                         >
@@ -214,7 +214,7 @@ const TelaCadastroBichinho = (props) => {
                 </Grid>
             </Box>
             <Box mt={3}>
-                <Grid container direction="row" justifyContent="flex-start">
+                <Grid container direction="row" justifyContent="center">
                     <Grid item xs={12} sm={12} lg={6} >
                         <TextField className={classes.campoEntrada}  onChange={(e) => { animal.contato = e.target.value }} id="outlined-basic" type="text" label="Contato" variant="outlined" />
                     </Grid>
@@ -222,30 +222,28 @@ const TelaCadastroBichinho = (props) => {
             </Box>
 
             <Box mt={3}>
-                <Grid container direction="row" justifyContent="flex-start">
+                <Grid container direction="row" justifyContent="center">
                     <Grid item xs={12} sm={12} lg={6} >
                         <p>Foto do Bichinho</p>
                     </Grid>
                 </Grid>
-                <Grid container direction="row" justifyContent="flex-start">
+                <Grid container direction="row" justifyContent="center">
                     <Grid item xs={12} sm={12} lg={6} >
                         <FotoPerfil src={texturapet} />
                     </Grid>
                 </Grid>
-                <Grid container direction="column" justifyContent="flex-start">
+                <Grid container direction="row" justifyContent="center">
                     <Grid item xs={12} sm={12} lg={6} >
                         <Button>Upload</Button>
-
                     </Grid>
 
                 </Grid>
             </Box>
 
             <Box mt={1}>
-                <Grid container direction="row" justifyContent="flex-start">
+                <Grid container direction="row" justifyContent="center">
                     <Grid item xs={12} sm={12} lg={6} >
                         <Button onClick={salvar}>Cadastrar</Button>
-                        <WarningButton >Limpar</WarningButton>
                     </Grid>
                 </Grid>
             </Box>

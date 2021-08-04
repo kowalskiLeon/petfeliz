@@ -62,7 +62,6 @@ const MenuSuperior = (props) => {
                             </Box>
                             <Box my={'auto'}><LinkMenu href="/home"><Titulo>Tela Inicial</Titulo></LinkMenu></Box>
                             <Box my={'auto'}><LinkMenu href="/cadastrobichinho"><Titulo>Cadastrar Bichinho</Titulo></LinkMenu></Box>
-                            <Box my={'auto'}><LinkMenu href="/cadastro"><Titulo>Atualizar Dados</Titulo></LinkMenu></Box>
                             <Box ml={3}> <Button onClick={sair}><h3>Sair</h3></Button> </Box>
                         </Grid>
                     </Box>

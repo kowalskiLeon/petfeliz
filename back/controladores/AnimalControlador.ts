@@ -26,4 +26,8 @@ export class AnimalControlador{
         return this.AnimalService.excluir(req, res);
     }
 
+    public pesquisar(req, res){
+        return this.AnimalService.pesquisar(req, res);
+    }
+
 }

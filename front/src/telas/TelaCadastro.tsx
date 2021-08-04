@@ -10,7 +10,8 @@ import { variableDeclarator } from "@babel/types";
 var pessoa: Pessoa = new Pessoa();
 var senhaConfirmacao: string;
 
-function validacao(){
+
+function validacao() {
     if (!pessoa.nome) {
         console.log('nome invalido')
         return false;
@@ -39,7 +40,7 @@ function validacao(){
         console.log('senha2 invalido')
         return false;
     }
-    if(senhaConfirmacao !== pessoa.senha){
+    if (senhaConfirmacao !== pessoa.senha) {
         console.log('senhas diferentes')
         return false;
     }
@@ -141,25 +142,11 @@ const TelaCadastro = (props) => {
 
     const classes = useStyles();
 
-    const Botao = () =>  {
-        if (localStorage.getItem('sessao.id') !== '-1') {
-            return (
-                <Button onClick={atualizar}>Atualizar</Button>
-
-            )
-        } else {
-            return (
-                <Button onClick={salvar}> Cadastrar</Button>
-            )
-        }
-
-    }
-
 
 
     const salvar = (e) => {
         e.preventDefault();
-        if (validacao()===true) {
+        if (validacao() === true) {
             Axios.post('http://localhost:3001/pessoa', {
                 params: {
                     nome: pessoa.nome,
@@ -176,19 +163,14 @@ const TelaCadastro = (props) => {
                         props.history.push('/home');
                     }
                 });
-        }else{
+        } else {
             console.log('falhou')
         }
     }
 
-    const limpar = (e) =>  {
+    const atualizar = (e) => {
         e.preventDefault();
-        pessoa = new Pessoa();
-    }
-
-    const atualizar  = (e) =>  {
-        e.preventDefault();
-        if (validacao()===true) {
+        if (validacao() === true) {
             Axios.put('http://localhost:3001/pessoa', {
                 params: {
                     pessoaModel: pessoa
@@ -200,10 +182,11 @@ const TelaCadastro = (props) => {
                         props.history.push('/home');
                     }
                 });
-        }else{
+        } else {
             console.log('falhou')
         }
     }
+
 
     return (
         <CorpoCadastro>
@@ -227,66 +210,67 @@ const TelaCadastro = (props) => {
                     </Grid>
                 </Grid>
             </Box>
-            <Box mt={3}>
-                <Grid container direction="row" justifyContent="center">
-                    <Grid item xs={12} sm={12} lg={6} >
-                        <TextField className={classes.campoEntrada} onChange={(e) => { pessoa.nome = e.target.value }}
-                            id="outlined-basic" type="text" label="Nome" variant="outlined" />
+            <form>
+                <Box mt={3}>
+                    <Grid container direction="row" justifyContent="center">
+                        <Grid item xs={12} sm={12} lg={6} >
+                            <TextField className={classes.campoEntrada} value = {pessoa.nome}  onChange={(e) => { pessoa.nome = e.target.value }}
+                                id="outlined-basic" type="text" label="Nome" variant="outlined" />
+                        </Grid>
                     </Grid>
-                </Grid>
-            </Box>
-            <Box mt={3}>
-                <Grid container direction="row" justifyContent="center">
-                    <Grid item xs={12} sm={12} lg={6} >
-                        <TextField className={classes.campoEntrada} onChange={(e) => { pessoa.sobrenome = e.target.value }}
-                            id="outlined-basic" type="text" label="Sobrenome" variant="outlined" />
+                </Box>
+                <Box mt={3}>
+                    <Grid container direction="row" justifyContent="center">
+                        <Grid item xs={12} sm={12} lg={6} >
+                            <TextField className={classes.campoEntrada} onChange={(e) => { pessoa.sobrenome = e.target.value }}
+                                id="outlined-basic" type="text" label="Sobrenome" variant="outlined" />
+                        </Grid>
                     </Grid>
-                </Grid>
-            </Box>
-            <Box mt={3}>
-                <Grid container direction="row" justifyContent="center">
-                    <Grid item xs={12} sm={12} lg={6} >
-                        <TextField
-                            id="date"
-                            label="Data de Nascimento"
-                            type="date"
-                            variant="outlined"
-                            onChange={(e) => { pessoa.nascimento = new Date(e.target.value) }}
-                            className={classes.campoEntrada}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                        />
+                </Box>
+                <Box mt={3}>
+                    <Grid container direction="row" justifyContent="center">
+                        <Grid item xs={12} sm={12} lg={6} >
+                            <TextField
+                                id="date"
+                                label="Data de Nascimento"
+                                type="date"
+                                variant="outlined"
+                                onChange={(e) => { pessoa.nascimento = new Date(e.target.value) }}
+                                className={classes.campoEntrada}
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
+                        </Grid>
                     </Grid>
-                </Grid>
-            </Box>
-            <Box mt={3}>
-                <Grid container direction="row" justifyContent="center">
-                    <Grid item xs={12} sm={12} lg={6} >
-                        <TextField className={classes.campoEntrada} id="outlined-basic" onChange={(e) => { pessoa.email = e.target.value }}
-                            type="email" label="E-Mail" variant="outlined" />
+                </Box>
+                <Box mt={3}>
+                    <Grid container direction="row" justifyContent="center">
+                        <Grid item xs={12} sm={12} lg={6} >
+                            <TextField className={classes.campoEntrada} id="outlined-basic" onChange={(e) => { pessoa.email = e.target.value }}
+                                type="email" label="E-Mail" variant="outlined" />
+                        </Grid>
                     </Grid>
-                </Grid>
-            </Box>
+                </Box>
 
-            <Box mt={3}>
-                <Grid container direction="row" justifyContent="center">
-                    <Grid item xs={12} sm={12} lg={6} >
-                        <TextField className={classes.campoEntrada} id="outlined-basic" onChange={(e) => { pessoa.telefone = e.target.value }}
-                            type="text" label="Telefone" variant="outlined" />
+                <Box mt={3}>
+                    <Grid container direction="row" justifyContent="center">
+                        <Grid item xs={12} sm={12} lg={6} >
+                            <TextField className={classes.campoEntrada} id="outlined-basic" onChange={(e) => { pessoa.telefone = e.target.value }}
+                                type="text" label="Telefone" variant="outlined" />
+                        </Grid>
                     </Grid>
-                </Grid>
-            </Box>
+                </Box>
 
-            <Box mt={3}>
-                <Grid container direction="row" justifyContent="center">
-                    <Grid item xs={12} sm={12} lg={6} >
-                        <TextField className={classes.campoEntrada} onChange={(e) => { pessoa.senha = e.target.value }}
-                            id="outlined-basic" type="password" label="Senha" variant="outlined" />
+                <Box mt={3}>
+                    <Grid container direction="row" justifyContent="center">
+                        <Grid item xs={12} sm={12} lg={6} >
+                            <TextField className={classes.campoEntrada} onChange={(e) => { pessoa.senha = e.target.value }}
+                                id="outlined-basic" type="password" label="Senha" variant="outlined" />
+                        </Grid>
                     </Grid>
-                </Grid>
-            </Box>
-
+                </Box>
+            </form>
             <Box mt={3}>
                 <Grid container direction="row" justifyContent="center">
                     <Grid item xs={12} sm={12} lg={6} >
@@ -299,8 +283,7 @@ const TelaCadastro = (props) => {
             <Box mt={1}>
                 <Grid container direction="row" justifyContent="center">
                     <Grid item xs={12} sm={12} lg={6} >
-                        <Botao></Botao>
-                        <WarningButton onClick={limpar}> Limpar</WarningButton>
+                        <Button onClick={salvar}> Cadastrar</Button>
                     </Grid>
                 </Grid>
             </Box>

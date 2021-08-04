@@ -1,4 +1,5 @@
 import { Animal, AnimalModel } from "../entidades/animal";
+import Op from 'sequelize';
 
 export class AnimalServico {
 
@@ -59,5 +60,27 @@ export class AnimalServico {
                 res.send(resposta);
             })
             .catch((err: Error) => res.status(500).json(err));
+    }
+
+    public pesquisar(req, res) {
+        
+        var nome = req.query.nomeAnimal
+        var idade = req.query.idadeAnimal
+        var tipo = req.query.tipoAnimal
+
+        AnimalModel.findAll<AnimalModel>({
+            where:{
+                nome: nome,
+                idade: idade,
+                tipo: tipo
+            }
+        })
+        .then((Animals: Array<AnimalModel>) => {
+            //console.log(Animals)
+            res.send(Animals)
+        })
+        .catch((err: Error) => {
+            res.send(err);
+        });
     }
 }

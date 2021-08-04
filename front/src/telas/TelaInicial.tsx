@@ -61,15 +61,13 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-var animal: Animal;
+
 
 const TelaInicial = () => {
-    const mudarAnimal = (a)=>{
-        console.log(a);
-        animal = a;
+    const [animal, setAnimal] = useState(new Animal())
+    const mudarAnimal = (a) =>{
+        setAnimal(a);
     }
-
-    const sendAnimal = () => {return animal};
 
     const classes = useStyles();
     return (
@@ -82,7 +80,7 @@ const TelaInicial = () => {
                     <Grid container direction="row" justifyContent="flex-start">
                         <Grid item direction="column" lg={6} xs={12} >
                             <InfoScreen>
-                                <ConteudoAnimais />
+                                <ConteudoAnimais animal={animal} mudarAnimal={mudarAnimal}/>
                             </InfoScreen>
                         </Grid>
                         <Grid item direction="column" lg={6} xs={12}>

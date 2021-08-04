@@ -29,5 +29,7 @@ export class Rotas {
             .get((req, res) => this.animalControlador.pegar(req, res))
             .put((req, res) => this.animalControlador.atualizar(req, res))
             .delete((req, res) => this.animalControlador.excluir(req, res));
+        app.route("/pesquisa")
+            .get((req, res) => this.animalControlador.pesquisar(req, res));
     }
 }
