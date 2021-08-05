@@ -12,6 +12,7 @@ export class AnimalModel extends Model {
     tipo: string
     contato: string
     idPessoa: number
+    imagem: string
 
 }
 
@@ -23,6 +24,7 @@ export interface Animal {
     tipo: string
     contato: string
     idPessoa: number
+    imagem: string
 }
 
 
@@ -67,7 +69,11 @@ AnimalModel.init(
             type: Sequelize.DATE,
             allowNull: false,
             defaultValue: Sequelize.NOW
-        }
+        },
+        imagem: {
+            type: Sequelize.BLOB('long'),
+            allowNull: false
+        },
     }, {
     tableName: 'animal',
     sequelize: database

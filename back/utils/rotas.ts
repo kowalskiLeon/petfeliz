@@ -2,11 +2,28 @@
 import { Request, Response } from "express";
 import { AnimalControlador } from "../controladores/AnimalControlador";
 import { PessoaControlador } from "../controladores/PessoaControlador";
+import multer from 'multer';
+import path from 'path'
 
 
 export class Rotas {
     public pessoaControlador: PessoaControlador = new PessoaControlador();
     public animalControlador: AnimalControlador = new AnimalControlador();
+
+
+    storage = multer.diskStorage(
+        {
+            destination: (req, file, cb) => {
+                cb(null, '../imgs')
+            },
+            filename: (req, file, cb) => {
+                console.log(file)
+                cb(null, Date.now() + path.extname(file.originalName))
+            }
+        }
+
+    )
+    upload = multer({ storage: this.storage })
 
     constructor() {
     }
@@ -24,7 +41,17 @@ export class Rotas {
 
         app.route("/animal")
             .get((req, res) => this.animalControlador.pegarTodos(req, res))
-            .post((req, res) => this.animalControlador.criar(req, res));
+            .post((req, res) => {
+                this.upload.single(req.body.params.image), (req1, res1) =>{
+                    try{
+                        console.log('yay---------------------')
+                    }catch(error){
+                        console.log(error);
+                        res.send(error);
+                    }
+                }
+                this.animalControlador.criar(req, res);
+            });
         app.route("/animal/:id")
             .get((req, res) => this.animalControlador.pegar(req, res))
             .put((req, res) => this.animalControlador.atualizar(req, res))

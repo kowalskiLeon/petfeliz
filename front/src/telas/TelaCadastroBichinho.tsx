@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
-import { Box, Container, Grid, TextField, Select, InputLabel, MenuItem } from "@material-ui/core";
+import { Box, Container, Grid, TextField, Select, InputLabel, MenuItem, Fab } from "@material-ui/core";
 import PetsOutlinedIcon from '@material-ui/icons/PetsOutlined';
 import texturapet from '../imgs/texturapet.jpg';
 import { Animal } from "../entidades/animal";
@@ -9,8 +9,11 @@ import Axios from 'axios';
 
 
 var animal: Animal = new Animal();
+//var imagem: (string | ArrayBuffer)[] = [];
+//imagem.push(texturapet);
 
-function validacao() {
+
+function validacao(imagem) {
     if (!animal.nome) {
         console.log('nome invalido')
         return false;
@@ -27,6 +30,10 @@ function validacao() {
         console.log('nascimento invalido')
         return false;
     }
+    if (!imagem) {
+        console.log('nascimento invalido')
+        return false;
+    }
     if (!animal.idade) {
         console.log('sobrenome invalido')
         return false;
@@ -36,6 +43,15 @@ function validacao() {
 }
 
 const TelaCadastroBichinho = (props) => {
+    const [imagem, setImagem] = useState([])
+    const mudarImagem = (p) => {
+        setImagem(p);
+    }
+
+    const mudarImagemAtual = (p) => {
+        setImagem(p);
+    }
+
     const CorpoCadastro = styled.div`
     width:100%;
     background-color: white;
@@ -106,6 +122,14 @@ const TelaCadastroBichinho = (props) => {
             backgroundColor: '#e7deff'
         },
 
+        button: {
+            margin: 10
+        },
+
+        input: {
+            display: "none"
+        },
+
         icon: {
             marginTop: 'auto',
             marginBottom: 'auto',
@@ -133,8 +157,9 @@ const TelaCadastroBichinho = (props) => {
 
     const salvar = (e) => {
         e.preventDefault();
+        console.log(imagem)
         animal.idPessoa = parseInt(localStorage.getItem('sessao.id'))
-        if (validacao() === true) {
+        if (validacao(imagem) === true) {
             Axios.post('http://localhost:3001/animal', {
                 params: {
                     nome: animal.nome,
@@ -142,7 +167,9 @@ const TelaCadastroBichinho = (props) => {
                     descricao: animal.descricao,
                     tipo: animal.tipo,
                     contato: animal.contato,
-                    idPessoa: animal.idPessoa
+                    idPessoa: animal.idPessoa,
+                    imagem : imagem,
+                    image: imagem
                 }
             })
                 .then(function (response) {
@@ -155,6 +182,23 @@ const TelaCadastroBichinho = (props) => {
             console.log('falhou')
         }
     }
+
+
+    const prevenirDefault = (e) =>{
+        e.preventDefault();
+    }
+
+    const handleUploadClick = event => {
+        var file = event.target.files[0];
+        const reader = new FileReader();
+        var url = reader.readAsDataURL(file);
+        reader.onloadend = function (e) {
+            console.log([reader.result]);
+            mudarImagemAtual([reader.result]);
+        }.bind(this);
+        console.log(url); // Would see a path?
+    };
+
 
     const classes = useStyles();
     return (
@@ -178,7 +222,7 @@ const TelaCadastroBichinho = (props) => {
             <Box mt={3}>
                 <Grid container direction="row" justifyContent="center">
                     <Grid item xs={12} sm={12} lg={6} >
-                        <TextField className={classes.campoEntrada} id="outlined-basic" onChange={(e) => { animal.idade = parseInt(e.target.value)}}
+                        <TextField className={classes.campoEntrada} id="outlined-basic" onChange={(e) => { animal.idade = parseInt(e.target.value) }}
                             type="number" label="Idade estimada em Meses" variant="outlined" />
                     </Grid>
                 </Grid>
@@ -216,7 +260,7 @@ const TelaCadastroBichinho = (props) => {
             <Box mt={3}>
                 <Grid container direction="row" justifyContent="center">
                     <Grid item xs={12} sm={12} lg={6} >
-                        <TextField className={classes.campoEntrada}  onChange={(e) => { animal.contato = e.target.value }} id="outlined-basic" type="text" label="Contato" variant="outlined" />
+                        <TextField className={classes.campoEntrada} onChange={(e) => { animal.contato = e.target.value }} id="outlined-basic" type="text" label="Contato" variant="outlined" />
                     </Grid>
                 </Grid>
             </Box>
@@ -229,12 +273,24 @@ const TelaCadastroBichinho = (props) => {
                 </Grid>
                 <Grid container direction="row" justifyContent="center">
                     <Grid item xs={12} sm={12} lg={6} >
-                        <FotoPerfil src={texturapet} />
+                        <FotoPerfil src={imagem} />
                     </Grid>
                 </Grid>
                 <Grid container direction="row" justifyContent="center">
                     <Grid item xs={12} sm={12} lg={6} >
-                        <Button>Upload</Button>
+                        <input
+                            accept="image/*"
+                            id="contained-button-file"
+                            name="image"
+                            className={classes.input}
+                            type="file"
+                            onChange={handleUploadClick}
+                        />
+                        <label htmlFor="contained-button-file">
+                            <Fab component="span" className={classes.button} >
+                                Upload
+                            </Fab>
+                        </label>
                     </Grid>
 
                 </Grid>

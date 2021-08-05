@@ -8,6 +8,7 @@ import texturapet from '../imgs/texturapet.jpg';
 import DadosAnimais from "./DadosAnimais";
 import Axios from 'axios';
 import { Animal } from "../entidades/animal";
+import { Buffer } from "buffer";
 
 
 const ConteudoAnimais = (props) => {
@@ -24,10 +25,16 @@ const ConteudoAnimais = (props) => {
             .then(function (response) {
                 if (response.data) {
                     mudarLista(response.data);
-                    console.log(listaAnimais);
+                    console.log(response.data);
                 }
             });
     }, []);
+
+    const buffToB64 = (entrada) =>{
+        const buffer = Buffer.from(entrada);
+        return buffer;
+    }
+
 
     const FotoPerfil = styled.img`
     border: 1px solid #ddd;
@@ -67,7 +74,7 @@ const ConteudoAnimais = (props) => {
                     </Grid>
                     <Grid container direction="row" justifyContent="center">
                         <Box>
-                            <FotoPerfil src={texturapet} />
+                            <FotoPerfil src={buffToB64(props.animal.imagem)} />
                         </Box>
                     </Grid>
                     <Grid container direction="row" justifyContent="center">
@@ -103,7 +110,7 @@ const ConteudoAnimais = (props) => {
                                 }}>
                                     <Box mx={6} mt={3}>
                                         <Grid container direction="column" justifyContent="center">
-                                            <MiniFoto src={texturapet} />
+                                            <MiniFoto src={buffToB64(campo.imagem)} />
                                             {campo.nome}
                                         </Grid>
                                     </Box>

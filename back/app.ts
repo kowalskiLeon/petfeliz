@@ -18,8 +18,9 @@ class App {
 
   private config(): void {
     this.app.use(cors())
-    this.app.use(bodyParser.json());
-    this.app.use(bodyParser.urlencoded({ extended: false }));
+    
+    this.app.use(bodyParser.json({limit: '50mb'}));
+    this.app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }));
   }
 }
 
